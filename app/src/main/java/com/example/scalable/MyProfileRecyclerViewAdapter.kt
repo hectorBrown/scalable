@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
  */
 class MyProfileRecyclerViewAdapter(
         private val mValues: List<Profile>,
