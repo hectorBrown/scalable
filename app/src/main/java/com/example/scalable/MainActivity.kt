@@ -1,24 +1,36 @@
 package com.example.scalable
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.findFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.scalable.profiles.Profiles
+import com.google.android.material.internal.ContextUtils.getActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        Profiles.ITEMS.add(Profile(0,"Grade 5 Saxophone",mutableListOf(
+            Scale('A', false),
+            Scale('A', true),
+            Scale('B', false),
+            Scale('B',true)
+        )))
+        Profiles.ITEMS.add(Profile(1, "Custom", mutableListOf(
+            Scale('C',false),
+            Scale('D',false)
+        )))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -36,4 +48,9 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onListFragmentInteraction(item: Profile?) {
+        this.findNavController(R.id.nav_host_fragment).navigate(R.id.action_FirstFragment_to_SecondFragment)
+    }
+
 }
