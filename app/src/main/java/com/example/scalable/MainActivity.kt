@@ -4,15 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.scalable.profiles.Profiles
-import com.google.android.material.internal.ContextUtils.getActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -50,7 +43,8 @@ class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteract
     }
 
     override fun onListFragmentInteraction(item: Profile?) {
-        this.findNavController(R.id.nav_host_fragment).navigate(R.id.action_FirstFragment_to_SecondFragment)
+        Profiles.CurrProf = item
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 
 }

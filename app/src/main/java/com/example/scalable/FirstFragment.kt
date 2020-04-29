@@ -32,5 +32,4 @@ class FirstFragment : Fragment() {
         }
     }
 
-    public fun onProfileSelected(profile: Profile?) = findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
 }

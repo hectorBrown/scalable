@@ -14,6 +14,7 @@ object Profiles {
      * An array of sample (dummy) items.
      */
     val ITEMS: MutableList<Profile> = mutableListOf()
+    var CurrProf: Profile? = null
 
     /**
      * A map of sample (dummy) items, by ID.
