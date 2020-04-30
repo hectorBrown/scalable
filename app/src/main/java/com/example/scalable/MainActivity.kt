@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
+import com.example.scalable.noteeditor.MenuItemFragment
 import com.example.scalable.profiles.Profiles
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -15,7 +16,7 @@ import java.lang.reflect.Type
 import kotlin.reflect.typeOf
 
 
-class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteractionListener, MenuItemFragment.OnListFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         //boilerplate
         super.onCreate(savedInstanceState)
@@ -131,6 +132,10 @@ class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteract
     override fun onListFragmentInteraction(item: Profile?) {
         Profiles.CurrProf = item
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_FirstFragment_to_SecondFragment)
+    }
+
+    override fun onListFragmentInteraction(item: String?) {
+        TODO("Not yet implemented")
     }
 
 }

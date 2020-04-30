@@ -1,17 +1,22 @@
-package com.example.scalable
+package com.example.scalable.noteeditor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import com.example.scalable.R
+import com.example.scalable.menu.MenuContent
 
 
 /**
  * A simple [Fragment] subclass.
  * Use the [NoteFragment.newInstance] factory method to
  * create an instance of this fragment.
+ */
+/**
+ * This class is loaded dynamically by the tab manager
+ * It contains the navhost fragment so that it can dynamically load lists
  */
 class NoteFragment : Fragment() {
     private var baseNote: String? = null
@@ -30,15 +35,11 @@ class NoteFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_note, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.base_note_label).text = baseNote
-        populateChecks()
-    }
-
-    fun populateChecks() {
-
+        MenuContent.CurrNote = baseNote
     }
 
     companion object {

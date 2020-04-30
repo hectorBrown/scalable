@@ -13,14 +13,14 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
+            app:destination="@id/profile_editor_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/profile_editor_fragment"
         android:name="com.example.scalable.ProfileEditorFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_profile_editor"/>
