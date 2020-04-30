@@ -6,24 +6,41 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
 import com.example.scalable.profiles.Profiles
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.lang.reflect.Type
+import kotlin.reflect.typeOf
+
 
 class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteractionListener {
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
+        //boilerplate
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        Profiles.ITEMS.add(Profile(0,"Grade 5 Saxophone",mutableListOf(
-            Scale('A', false),
-            Scale('A', true),
-            Scale('B', false),
-            Scale('B',true)
-        )))
-        Profiles.ITEMS.add(Profile(1, "Custom", mutableListOf(
-            Scale('C',false),
-            Scale('D',false)
-        )))
+
+        //json parsing -- load file
+        val gson = Gson()
+        val profileSave = File(filesDir.path + "profilesave.json")
+        val profileListType = object : TypeToken<MutableList<Profile>>() {}.type
+        Profiles.ITEMS.addAll(gson.fromJson(profileSave.readText(),profileListType))
+        //test profile defaults
+//        Profiles.ITEMS.add(Profile(0,"Grade 5 Saxophone",mutableListOf(
+//            Scale('A', false),
+//            Scale('A', true),
+//            Scale('B', false),
+//            Scale('B',true)
+//        )))
+//        Profiles.ITEMS.add(Profile(1, "Custom", mutableListOf(
+//            Scale('C',false),
+//            Scale('D',false)
+//        )))
+//        profileSave.writeText(gson.toJson(Profiles.ITEMS,profileListType))
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
