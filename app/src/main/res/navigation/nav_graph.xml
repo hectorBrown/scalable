@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/first_fragment"
-        android:name="com.example.scalable.FirstFragment"
+        android:name="com.example.scalable.ListFabFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_list_fab">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -21,14 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.scalable.SecondFragment"
+        android:name="com.example.scalable.ProfileEditorFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/first_fragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
-    </fragment>
+        tools:layout="@layout/fragment_profile_editor"/>
 </navigation>

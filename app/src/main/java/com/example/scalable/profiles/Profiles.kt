@@ -16,14 +16,5 @@ object Profiles {
     val ITEMS: MutableList<Profile> = mutableListOf()
     var CurrProf: Profile? = null
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    val ITEM_MAP: MutableMap<Int, Profile> = HashMap()
-
-    private fun addItem(item: Profile) {
-        ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
-    }
 
 }

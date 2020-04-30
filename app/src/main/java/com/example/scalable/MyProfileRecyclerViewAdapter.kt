@@ -9,7 +9,7 @@ import android.widget.TextView
 
 import com.example.scalable.ProfileFragment.OnListFragmentInteractionListener
 
-import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_listitem.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -33,7 +33,7 @@ class MyProfileRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_profile, parent, false)
+                .inflate(R.layout.fragment_listitem, parent, false)
         return ViewHolder(view)
     }
 
