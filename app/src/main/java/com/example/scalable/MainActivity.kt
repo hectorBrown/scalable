@@ -5,18 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
-import com.example.scalable.noteeditor.MenuItemFragment
+import com.example.scalable.noteeditor.NoteSpecificScaleListFragment
 import com.example.scalable.profiles.Profiles
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
-import java.lang.reflect.Type
-import kotlin.reflect.typeOf
 
 
-class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteractionListener, MenuItemFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteractionListener, NoteSpecificScaleListFragment.OnListFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         //boilerplate
         super.onCreate(savedInstanceState)
@@ -60,56 +55,56 @@ class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteract
             Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred),
             Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued),
             Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred),
-            Scale('G', Scale.Range.Oct, articulation=Scale.Articulation.Slurred, thirds=true),
-            Scale('G', Scale.Range.Oct, articulation=Scale.Articulation.Tongued, thirds=true),
-            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, chromatic=true),
-            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, chromatic=true),
-            Scale('G', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, chromatic=true, sharp=true),
-            Scale('G', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, chromatic=true, sharp=true),
-            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, chromatic=true),
-            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, chromatic=true),
-            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Slurred, arpeggio=true, sharp=true),
-            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Tongued, arpeggio=true, sharp=true),
-            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, arpeggio=true, sharp=true),
-            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, arpeggio=true, sharp=true),
-            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, arpeggio=true, sharp=true),
-            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, arpeggio=true, sharp=true),
-            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('B', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('B', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('F', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('F', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, arpeggio=true),
-            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, arpeggio=true),
-            Scale('C', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Slurred, seventh=Scale.Seventh.Dominant),
-            Scale('C', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Tongued, seventh=Scale.Seventh.Dominant),
-            Scale('D', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, seventh=Scale.Seventh.Dominant),
-            Scale('D', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, seventh=Scale.Seventh.Dominant),
-            Scale('G', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, seventh=Scale.Seventh.Dominant),
-            Scale('G', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, seventh=Scale.Seventh.Dominant),
-            Scale('G', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Slurred, seventh=Scale.Seventh.Diminished),
-            Scale('G', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Tongued, seventh=Scale.Seventh.Diminished),
-            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, seventh=Scale.Seventh.Diminished),
-            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, seventh=Scale.Seventh.Diminished),
-            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, seventh=Scale.Seventh.Diminished),
-            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, seventh=Scale.Seventh.Diminished))))
+            Scale('G', Scale.Range.Oct, articulation=Scale.Articulation.Slurred, type= Scale.Type.Thirds),
+            Scale('G', Scale.Range.Oct, articulation=Scale.Articulation.Tongued, type=Scale.Type.Thirds),
+            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, type=Scale.Type.Chromatic),
+            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, type=Scale.Type.Chromatic),
+            Scale('G', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, type=Scale.Type.Chromatic, sharp=true),
+            Scale('G', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, type=Scale.Type.Chromatic, sharp=true),
+            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, type=Scale.Type.Chromatic),
+            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, type=Scale.Type.Chromatic),
+            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio, sharp=true),
+            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio, sharp=true),
+            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio, sharp=true),
+            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio, sharp=true),
+            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio, sharp=true),
+            Scale('G', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio, sharp=true),
+            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Major, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('A', Scale.Range.Twelfth, majMin=Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('B', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('B', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('B', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('D', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('F', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('F', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Melodic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Tongued, type=Scale.Type.Arpeggio),
+            Scale('F', Scale.Range.TwoOct, majMin = Scale.MajMin.Harmonic, articulation=Scale.Articulation.Slurred, type=Scale.Type.Arpeggio),
+            Scale('C', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Slurred, type=Scale.Type.DominantSeventh),
+            Scale('C', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Tongued, type=Scale.Type.DominantSeventh),
+            Scale('D', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, type=Scale.Type.DominantSeventh),
+            Scale('D', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, type=Scale.Type.DominantSeventh),
+            Scale('G', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, type=Scale.Type.DominantSeventh),
+            Scale('G', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, type=Scale.Type.DominantSeventh),
+            Scale('G', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Slurred, type=Scale.Type.DiminishedSeventh),
+            Scale('G', Scale.Range.Twelfth, sharp=true, articulation=Scale.Articulation.Tongued, type=Scale.Type.DiminishedSeventh),
+            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Slurred, type=Scale.Type.DiminishedSeventh),
+            Scale('A', Scale.Range.Twelfth, articulation=Scale.Articulation.Tongued, type=Scale.Type.DiminishedSeventh),
+            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Slurred, type=Scale.Type.DiminishedSeventh),
+            Scale('D', Scale.Range.TwoOct, articulation=Scale.Articulation.Tongued, type=Scale.Type.DiminishedSeventh))))
         ProfileFileHandler.saveProfiles()
     }
 
@@ -134,8 +129,8 @@ class MainActivity : AppCompatActivity(), ProfileFragment.OnListFragmentInteract
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 
-    override fun onListFragmentInteraction(item: String?) {
-        TODO("Not yet implemented")
+    override fun onListFragmentInteraction(item: Scale?) {
+        //TODO(not yet implemented)
     }
 
 }

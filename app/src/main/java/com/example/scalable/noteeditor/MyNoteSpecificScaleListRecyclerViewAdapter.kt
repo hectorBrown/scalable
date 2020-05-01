@@ -6,27 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.scalable.R
+import com.example.scalable.Scale
 
 
-import com.example.scalable.noteeditor.MenuItemFragment.OnListFragmentInteractionListener
-
+import com.example.scalable.noteeditor.NoteSpecificScaleListFragment.OnListFragmentInteractionListener
 import kotlinx.android.synthetic.main.fragment_listitem.view.*
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
-class MyMenuItemRecyclerViewAdapter(
-    private val mValues: List<String>,
+
+class MyNoteSpecificScaleListRecyclerViewAdapter(
+    private val mValues: List<Scale>,
     private val mListener: OnListFragmentInteractionListener?
-) : RecyclerView.Adapter<MyMenuItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MyNoteSpecificScaleListRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as String
+            val item = v.tag as Scale
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
@@ -41,7 +37,7 @@ class MyMenuItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mContentView.text = item
+        holder.mContentView.text = item.toString()
 
         with(holder.mView) {
             tag = item
